@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{14c29212-22f0-4981-9c1e-e483bfe0da5d}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>InThePocket</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Page\SongList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Comm\WearableBridge.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\DataAccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\DataAccess\SongDataAccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\DataAccess\SongTempoDataAccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\DataAccess\SongSetDataAccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\DataAccess\SongSetSongDataAccess.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\Artist.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\IModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\ISortableModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\ModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\Song.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SongSet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SongSetSong.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SongTempo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SortableModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Route.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Navigation\Router.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\ExtendedControls\SortableListView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongList.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongSetForm.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongTempoForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UI\UserControls\EditDeletePanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UI\UserControls\ListViewCreateFooter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utils\LanguageUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainMenuViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\RouterViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongFormViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongSetFormViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongSetListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongTempoFormViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Page\PageBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongSetList.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Page\SongSetList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Page\SongSetForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\UserControls\ListViewCreateFooter.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Classes\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Tools\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Page\SongForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\UserControls\EditDeletePanel.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Page\SongTempoForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<d:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="InThePocket.UI.Page.SongSetList"
+            xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+            xmlns:extendcontrols="clr-namespace:InThePocket.UI.ExtendedControls"
+            x:Name="SongSetList"
+            xmlns:usercontrols="clr-namespace:InThePocket.UI.UserControls"
+            xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
+            Title="Set Lists">
+    <extendcontrols:SortableListView ItemsSource="{Binding Items}"
+                                     SelectionMode="Single"
+                                     DragStartMode="OnDragIndicator"
+                                     SelectionBackgroundColor="#CCCCCC"
+                                     ItemSize="60"
+                                     x:Name="listView"
+                                     SelectedItem="{Binding SelectedItem}"
+                                     IsStickyFooter="True"
+                                     AllowSwiping="True">
+        <!--Built in Cells-->
+        <syncfusion:SfListView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="60" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="textLabel"
+                           Text="{Binding Path=Name}"
+                           Grid.Column="0"
+                           FontSize="15"
+                           TextColor="#333333"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Margin="5,0,0,0" />
+
+                    <syncfusion:DragIndicatorView Grid.Column="1"
+                                                  ListView="{x:Reference listView}"
+                                                  HorizontalOptions="Center"
+                                                  VerticalOptions="Center">
+                        <Grid Padding="10, 20, 20, 20">
+                            <Image Source="DragIndicator.png"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" />
+                        </Grid>
+                    </syncfusion:DragIndicatorView>
+                </Grid>
+            </DataTemplate>
+        </syncfusion:SfListView.ItemTemplate>
+        
+        <syncfusion:SfListView.FooterTemplate>
+            <DataTemplate>
+                <usercontrols:ListViewCreateFooter LabelText="Add New Set List"
+                                                   CreateItemCommand="{Binding Path=BindingContext.CreateItem, Source={x:Reference listView}}" />
+            </DataTemplate>
+        </syncfusion:SfListView.FooterTemplate>
+
+        <syncfusion:SfListView.LeftSwipeTemplate>
+            <DataTemplate x:Name="LeftSwipeTemplate">
+                <usercontrols:EditDeletePanel EditCommand="{Binding Path=BindingContext.Edit, Source = {x:Reference listView}}"
+                                              DeleteCommand="{Binding Path=BindingContext.Delete, Source = {x:Reference listView}}"
+                                              CommandParameter="{Binding}" />
+            </DataTemplate>
+        </syncfusion:SfListView.LeftSwipeTemplate>
+    </extendcontrols:SortableListView>
+</d:PageBase>

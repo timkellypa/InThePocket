@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      x:Class="InThePocket.UI.UserControls.EditDeletePanel"
+      HorizontalOptions="Fill"
+      VerticalOptions="Fill"
+      Grid.Column="0"
+      BackgroundColor="#2196F3"
+      x:Name="editDeletePanel">
+    <Grid VerticalOptions="Fill"
+          HorizontalOptions="Fill"
+          Grid.Column="0"
+          BackgroundColor="OrangeRed">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding Path=DeleteCommand, Source = {x:Reference editDeletePanel}}"
+                                  CommandParameter="{Binding Path=CommandParameter, Source= {x:Reference editDeletePanel}}" />
+        </Grid.GestureRecognizers>
+        <Image Grid.Column="0"
+               Grid.Row="0"
+               Margin="10,10,10,10"
+               HeightRequest="30"
+               Source="delete.png" />
+    </Grid>
+    <Grid VerticalOptions="Fill"
+          HorizontalOptions="Fill"
+          Grid.Column="1">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding Path=EditCommand, Source = {x:Reference editDeletePanel}}"
+                                  CommandParameter="{Binding Path=CommandParameter, Source= {x:Reference editDeletePanel}}" />
+        </Grid.GestureRecognizers>
+        <Image Grid.Column="0"
+               Grid.Row="0"
+               Margin="10,10,10,10"
+               HeightRequest="30"
+               Source="edit.png" />
+    </Grid>
+</Grid>

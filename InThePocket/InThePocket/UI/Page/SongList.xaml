@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<d:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="InThePocket.UI.Page.SongList"
+            xmlns:controls="clr-namespace:InThePocket.UI.Controls;Assembly:InThePocket"
+            x:Name="SongList"
+            xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+            xmlns:extendcontrols="clr-namespace:InThePocket.UI.ExtendedControls"
+            xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
+            xmlns:usercontrols="clr-namespace:InThePocket.UI.UserControls"
+            Title="Songs">
+    <ContentPage.ToolbarItems>
+        <!--
+        <ToolbarItem Name="New" Command="{Binding CreateItem}"></ToolbarItem>
+        -->
+    </ContentPage.ToolbarItems>
+    <extendcontrols:SortableListView ItemsSource="{Binding Items}"
+                           SelectionMode="Single"
+                           DragStartMode="OnDragIndicator"
+                           SelectionBackgroundColor="#CCCCCC"
+                           ItemSize="60"
+                           x:Name="listView"
+                           SelectedItem="{Binding SelectedItem}"
+                           IsStickyFooter="True"
+                           AllowSwiping="True">
+
+        <syncfusion:SfListView.FooterTemplate>
+            <DataTemplate>
+                <usercontrols:ListViewCreateFooter LabelText="Add New Song"
+                                                   CreateItemCommand="{Binding Path=BindingContext.CreateItem, Source={x:Reference listView}}" />
+            </DataTemplate>
+        </syncfusion:SfListView.FooterTemplate>
+
+        <syncfusion:SfListView.LeftSwipeTemplate>
+            <DataTemplate x:Name="LeftSwipeTemplate">
+                <usercontrols:EditDeletePanel EditCommand="{Binding Path=BindingContext.Edit, Source = {x:Reference listView}}"
+                                              DeleteCommand="{Binding Path=BindingContext.Delete, Source = {x:Reference listView}}"
+                                              CommandParameter="{Binding}" />
+            </DataTemplate>
+        </syncfusion:SfListView.LeftSwipeTemplate>
+
+        <syncfusion:SfListView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="60" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="textLabel"
+                           Text="{Binding Path=Song.Name}"
+                           Grid.Column="0"
+                           FontSize="15"
+                           TextColor="#333333"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Margin="5,0,0,0" />
+
+                    <syncfusion:DragIndicatorView Grid.Column="1"
+                                                  ListView="{x:Reference listView}"
+                                                  HorizontalOptions="Center"
+                                                  VerticalOptions="Center">
+                        <Grid Padding="10, 20, 20, 20">
+                            <Image Source="DragIndicator.png"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" />
+                        </Grid>
+                    </syncfusion:DragIndicatorView>
+                </Grid>
+            </DataTemplate>
+        </syncfusion:SfListView.ItemTemplate>
+    </extendcontrols:SortableListView>
+</d:PageBase>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<d:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
+             x:Class="InThePocket.UI.Page.SongSetForm"
+            Title="{Binding PageTitle}">
+    <StackLayout>
+        <Entry Placeholder="Name" Text="{Binding Path=Model.Name}"></Entry>
+        <StackLayout Orientation="Horizontal" Spacing="0">
+            <Label Text="Master List" FontSize="Large" VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+            <Switch IsToggled="{Binding Model.IsMaster}" HorizontalOptions="End" VerticalOptions="Center" />
+        </StackLayout>
+        <Entry Placeholder="Location" IsVisible="{Binding Model.IsEvent}" Text="{Binding Path=Model.Location}"></Entry>
+        <DatePicker IsVisible="{Binding Model.IsEvent}" Date="{Binding Path=Model.Date}"></DatePicker>
+        <Button Command="{Binding Path=SaveClicked}" BackgroundColor="DarkGreen" Text="Save" TextColor="White"></Button>
+    </StackLayout>
+</d:PageBase>

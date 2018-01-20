@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<d:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
+            xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+            xmlns:extendcontrols="clr-namespace:InThePocket.UI.ExtendedControls"
+            xmlns:usercontrols="clr-namespace:InThePocket.UI.UserControls"
+            x:Class="InThePocket.UI.Page.SongForm"
+            Title="{Binding PageTitle}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Entry Grid.Row="0" Placeholder="Name" Text="{Binding Path=Model.Name}"></Entry>
+        <Entry Grid.Row="1" Placeholder="Notes" Text="{Binding Path=Model.Notes}"></Entry>
+        <extendcontrols:SortableListView Grid.Row="2"
+                                         ItemsSource="{Binding SongTempos}"
+                                         SelectionMode="None"
+                                         DragStartMode="OnDragIndicator"
+                                         SelectionBackgroundColor="#CCCCCC"
+                                         ItemSize="60"
+                                         x:Name="tempoListView"
+                                         IsStickyFooter="True"
+                                         AllowSwiping="True">
+            <!--Built in Cells-->
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="60" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="textLabel"
+                               Text="{Binding Path=DisplayText}"
+                               Grid.Column="0"
+                               FontSize="15"
+                               TextColor="#333333"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               Margin="5,0,0,0" />
+
+                        <syncfusion:DragIndicatorView Grid.Column="1"
+                                                      ListView="{x:Reference tempoListView}"
+                                                      HorizontalOptions="Center"
+                                                      VerticalOptions="Center">
+                            <Grid Padding="10, 20, 20, 20">
+                                <Image Source="DragIndicator.png"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Center" />
+                            </Grid>
+                        </syncfusion:DragIndicatorView>
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+
+            <syncfusion:SfListView.FooterTemplate>
+                <DataTemplate>
+                    <usercontrols:ListViewCreateFooter LabelText="Add New Tempo"
+                                                       CreateItemCommand="{Binding Path=BindingContext.CreateTempo, Source={x:Reference tempoListView}}" />
+                </DataTemplate>
+            </syncfusion:SfListView.FooterTemplate>
+
+            <syncfusion:SfListView.LeftSwipeTemplate>
+                <DataTemplate x:Name="LeftSwipeTemplate">
+                    <usercontrols:EditDeletePanel EditCommand="{Binding Path=BindingContext.EditTempo, Source = {x:Reference tempoListView}}"
+                                                  DeleteCommand="{Binding Path=BindingContext.DeleteTempo, Source = {x:Reference tempoListView}}"
+                                                  CommandParameter="{Binding}" />
+                </DataTemplate>
+            </syncfusion:SfListView.LeftSwipeTemplate>
+        </extendcontrols:SortableListView>
+        <Button Grid.Row="3" Command="{Binding Path=SaveClicked}" BackgroundColor="DarkGreen" Text="Save" TextColor="White"></Button>
+    </Grid>
+</d:PageBase>

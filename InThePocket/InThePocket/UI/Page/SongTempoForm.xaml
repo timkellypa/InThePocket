@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<d:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
+            xmlns:syncfusion="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+            x:Class="InThePocket.UI.Page.SongTempoForm"
+            Title="{Binding PageTitle}">
+    <StackLayout StyleClass="StackedForm">
+        <Label Text="BPM" />
+        <syncfusion:SfNumericUpDown Value="{Binding Path=Model.BPM}"
+                                    Minimum="0"
+                                    Maximum="300"
+                                    Watermark="BPM" />
+        <Label Text="Time Signature" />
+        <StackLayout Orientation="Horizontal">
+            <Picker ItemsSource="{Binding BeatsPerBarOptions}"
+                    ItemDisplayBinding="{Binding Value}"
+                    SelectedItem="{Binding SelectedBeatsPerBar, Mode=TwoWay}" />
+            <Label Text="/" />
+            <Picker ItemsSource="{Binding BeatUnitOptions}"
+                    ItemDisplayBinding="{Binding Value}"
+                    SelectedItem="{Binding SelectedBeatUnit, Mode=TwoWay}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Switch IsToggled="{Binding Model.DottedQuarterAccent}"/>
+            <Label Text="Dotted Quarter Accent (usually for 6/8 time)" />
+        </StackLayout>
+        <Label Text="Accent Beats Per Bar"></Label>
+        <Picker ItemsSource="{Binding AccentBeatsPerBarOptions}"
+                ItemDisplayBinding="{Binding Value}"
+                SelectedItem="{Binding SelectedAccentBeatsPerBar, Mode=TwoWay}" />
+        <Label Text="Number of Bars" />
+        <syncfusion:SfNumericUpDown Value="{Binding Path=Model.NumberOfBars, Mode=TwoWay}"
+                                    Minimum="1"
+                                    Maximum="500"
+                                    AllowNull="True"
+                                    Watermark="unlimited" />
+        <Button Command="{Binding Path=SaveClicked}"
+                BackgroundColor="DarkGreen"
+                Text="Save"
+                TextColor="White"></Button>
+    </StackLayout>
+</d:PageBase>

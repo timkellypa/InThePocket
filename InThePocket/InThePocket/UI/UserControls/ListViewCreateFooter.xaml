@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="InThePocket.UI.UserControls.ListViewCreateFooter"
+    HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0"  BackgroundColor="#2196F3"
+    x:Name="listViewCreateFooter"
+>
+    <Grid VerticalOptions="Fill" HorizontalOptions="Fill" Grid.Column="0" BackgroundColor="Green">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding Path=CreateItemCommand, Source={x:Reference listViewCreateFooter}}" />
+        </Grid.GestureRecognizers>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0"
+                            Grid.Row="0"
+                            Margin="10,10,10,10"
+                            HeightRequest="30"
+                            HorizontalOptions="Start"
+                            Source="plus.png" />
+        <Label Grid.Column="0" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" Text="{Binding Path=LabelText, Source={x:Reference listViewCreateFooter}}"/>
+    </Grid>
+</Grid>
