@@ -145,9 +145,9 @@ namespace InThePocket.ViewModel
             }
         }
 
-        private Song _selectedItem;
+        private SongSetSong _selectedItem;
 
-        public Song SelectedItem
+        public SongSetSong SelectedItem
         {
             get
             {
@@ -165,9 +165,9 @@ namespace InThePocket.ViewModel
                             await Task.Delay(250);
                             SelectedItem = null;
                         });
+                        NotifyPropertyChanged($"ROUTE/SongView/load/{value.SongId.ToString()}/song_set_id/{SongSetID.ToString()}");
                     }
                 }
-                // NotifyPropertyChanged($"ROUTE/SongView/load/{value.Id.ToString()}/song_set_id/{SongSetID.ToString()}");
             }
         }
     }

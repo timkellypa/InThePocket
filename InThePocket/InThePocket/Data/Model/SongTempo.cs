@@ -72,6 +72,31 @@ namespace InThePocket.Data.Model
             }
         }
 
+        [Ignore]
+        public double CalculatedBPM
+        {
+            get
+            {
+                return BPM * (BeatUnit / 4) * (DottedQuarterAccent ? 1.5 : 1);
+            }
+        }
+
+        [Ignore]
+        public int[] AccentCounts
+        {
+            get
+            {
+                int length = AccentBeatsPerBar;
+                int[] ret = new int[AccentBeatsPerBar];
+                ret[0] = 1;
+                for (int i = 1; i < AccentBeatsPerBar; ++i)
+                {
+                    ret[i] = (BeatsPerBar / AccentBeatsPerBar) * i + 1;
+                }
+                return ret;
+            }
+        }
+
         public object Clone ()
         {
             return new SongTempo()

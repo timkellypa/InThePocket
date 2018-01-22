@@ -11,7 +11,7 @@ using InThePocket.Data.Model;
 
 namespace InThePocket.ViewModel
 {
-    class SongTempoFormViewModel : ViewModelBase
+    public class SongTempoFormViewModel : ViewModelBase
     {
         private const int BEATS_PER_BAR_MIN = 2;
         private const int BEATS_PER_BAR_MAX = 32;

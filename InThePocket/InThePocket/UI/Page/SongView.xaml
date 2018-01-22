@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<d:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
+            x:Class="InThePocket.UI.Page.SongView"
+            Title="{Binding PageTitle}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="PrimaryClickIndicator"
+                  BackgroundColor="{Binding PrimaryIndicatorBackgroundColor}"
+                  Grid.Column="0" />
+            <Grid x:Name="SongInfoGrid"
+                  Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackLayout Orientation="Vertical" Grid.Row="0" VerticalOptions="Center">
+                    <Label FontSize="Large"
+                           HorizontalTextAlignment="Center"
+                           Text="{Binding Model.Name}" />
+                    <Label FontSize="Small"
+                           HorizontalTextAlignment="Center"
+                           Text="{Binding Model.Notes}" />
+                </StackLayout>
+                <Label Grid.Row="1"
+                       HorizontalTextAlignment="Center"
+                       FontSize="Large"
+                       Text="{Binding Metronome.Count}" />
+            </Grid>
+            <Grid x:Name="SecondaryClickIndicator"
+                  BackgroundColor="{Binding SecondaryIndicatorBackgroundColor}"
+                  Grid.Column="2" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Command="{Binding CountOutCommand}"
+                            Text="Count Out" />
+                    <Grid Grid.Column="1"
+                          VerticalOptions="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0"
+                               HorizontalTextAlignment="Center"
+                               Text="{Binding Metronome.CurrentTempo.BPM}" />
+                        <Label Grid.Row="1"
+                               HorizontalTextAlignment="Center"
+                               Text="BPM" />
+                    </Grid>
+                    <Button Grid.Column="2"
+                            Command="{Binding PlayCommand}"
+                            Text="Play" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Text="&lt; Previous"></Button>
+                    <Button Grid.Column="1"
+                            Text="Next &gt;"></Button>
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</d:PageBase>

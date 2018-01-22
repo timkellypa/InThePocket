@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SortableModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Route.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Router.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools\Metronome.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\ExtendedControls\SortableListView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongForm.xaml.cs">
       <SubType>Code</SubType>
@@ -42,6 +43,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongList.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongSetForm.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongTempoForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)UI\UserControls\EditDeletePanel.xaml.cs">
@@ -56,6 +60,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongSetListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongTempoFormViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongViewViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Page\PageBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongSetList.xaml.cs">
@@ -79,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Classes\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Tools\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Converters\" />
     <Folder Include="$(MSBuildThisFileDirectory)Resources\" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +99,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Page\SongTempoForm.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Page\SongView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
