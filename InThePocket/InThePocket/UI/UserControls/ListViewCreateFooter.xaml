@@ -6,7 +6,7 @@
     HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="0"  BackgroundColor="#2196F3"
     x:Name="listViewCreateFooter"
 >
-    <Grid VerticalOptions="Fill" HorizontalOptions="Fill" Grid.Column="0" BackgroundColor="Green">
+    <Grid VerticalOptions="Fill" HorizontalOptions="Fill" Grid.Column="0" BackgroundColor="DarkGreen">
         <Grid.GestureRecognizers>
             <TapGestureRecognizer Command="{Binding Path=CreateItemCommand, Source={x:Reference listViewCreateFooter}}" />
         </Grid.GestureRecognizers>

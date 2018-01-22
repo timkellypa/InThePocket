@@ -59,7 +59,7 @@
 
             <syncfusion:SfListView.FooterTemplate>
                 <DataTemplate>
-                    <usercontrols:ListViewCreateFooter LabelText="Add New Tempo"
+                    <usercontrols:ListViewCreateFooter LabelText="Save &amp; Add New Tempo"
                                                        CreateItemCommand="{Binding Path=BindingContext.CreateTempo, Source={x:Reference tempoListView}}" />
                 </DataTemplate>
             </syncfusion:SfListView.FooterTemplate>

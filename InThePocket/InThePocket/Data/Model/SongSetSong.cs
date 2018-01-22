@@ -14,6 +14,9 @@ namespace InThePocket.Data.Model
         [Column("SongSetId")]
         public Guid SongSetId { get; set; }
 
+        [Column("Notes")]
+        public string Notes { get; set; }
+
         [Ignore]
         public Song Song { get; set; }
 

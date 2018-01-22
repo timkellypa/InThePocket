@@ -94,6 +94,22 @@ namespace InThePocket.ViewModel
             }
         }
 
+        private ICommand _importSong;
+        public ICommand ImportSong
+        {
+            get
+            {
+                if (_importSong == null)
+                {
+                    _importSong = new Xamarin.Forms.Command((sender) =>
+                    {
+                        NotifyPropertyChanged($"ROUTE/SongImport/song_set_id/{SongSetID.ToString()}");
+                    });
+                }
+                return _importSong;
+            }
+        }
+
         private ICommand _createItem;
         public ICommand CreateItem
         {

@@ -122,8 +122,9 @@ namespace InThePocket.ViewModel
             {
                 if (_createTempo == null)
                 {
-                    _createTempo = new Xamarin.Forms.Command((sender) =>
+                    _createTempo = new Xamarin.Forms.Command(async (sender) =>
                     {
+                        await PerformSave();
                         NotifyPropertyChanged($"ROUTE/SongTempoForm/add/song_id/{Model.Id}");
                     });
                 }
@@ -164,6 +165,27 @@ namespace InThePocket.ViewModel
             }
         }
 
+        public async Task PerformSave()
+        {
+            await Model.Save();
+            if (Add)
+            {
+                SongSetSong newSongSetSong = new SongSetSong()
+                {
+                    Id = Guid.NewGuid(),
+                    SongId = Model.Id,
+
+                    // 0 will trigger model to set when saving
+                    OrderNdx = 0
+                };
+                await newSongSetSong.Save();
+            }
+            else
+            {
+                await Model.Save();
+            }
+        }
+
         private ICommand _saveClicked;
         public ICommand SaveClicked
         {
@@ -175,23 +197,7 @@ namespace InThePocket.ViewModel
                     {
                         Task.Run(async () =>
                         {
-                            await Model.Save();
-                            if (Add)
-                            {
-                                SongSetSong newSongSetSong = new SongSetSong()
-                                {
-                                    Id = Guid.NewGuid(),
-                                    SongId = Model.Id,
-
-                                    // 0 will trigger model to set when saving
-                                    OrderNdx = 0
-                                };
-                                await newSongSetSong.Save();
-                            }
-                            else
-                            {
-                                await Model.Save();
-                            }
+                            await PerformSave();
                             NotifyPropertyChanged("ROUTE/Close/load");
                         });
                     });
