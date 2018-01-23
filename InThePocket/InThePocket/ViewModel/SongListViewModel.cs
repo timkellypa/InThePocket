@@ -103,7 +103,7 @@ namespace InThePocket.ViewModel
                 {
                     _importSong = new Xamarin.Forms.Command((sender) =>
                     {
-                        NotifyPropertyChanged($"ROUTE/SongImport/song_set_id/{SongSetID.ToString()}");
+                        NotifyPropertyChanged($"ROUTE/ImportSong/load/song_set_id/{SongSetID.ToString()}");
                     });
                 }
                 return _importSong;

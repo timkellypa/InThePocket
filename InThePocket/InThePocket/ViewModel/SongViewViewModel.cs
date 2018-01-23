@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Input;
 using System.Threading.Tasks;
 
+using System.Linq;
+
 using InThePocket.Tools;
 using InThePocket.Data;
 using InThePocket.Data.Model;
@@ -34,6 +36,18 @@ namespace InThePocket.ViewModel
             get => (SongSet == null || SongSetSongList == null) ? "" : $"{SongSet.Name}: Song {SongNdx} of {SongSetSongList.Count}";
         }
 
+        public bool NextEnabled
+        {
+            get => !(SongSet == null || SongSetSongList == null) && SongNdx < SongSetSongList.Count;
+        }
+
+        public bool PreviousEnabled
+        {
+            get => !(SongSet == null || SongSetSongList == null) && SongNdx > 1;
+        }
+
+        public SongSetSong SongSetSong { get; set; }
+
         public Song Model { get; set; }
 
         public int SongNdx { get; set; }
@@ -52,6 +66,11 @@ namespace InThePocket.ViewModel
             bool load = false;
             Guid songSetId = Guid.Empty,
                  songId = Guid.Empty;
+
+            if (SongSet != null)
+            {
+                songSetId = SongSet.Id;
+            }
             arguments.ForEach((arg) =>
             {
                 if (previous == "load")
@@ -69,6 +88,9 @@ namespace InThePocket.ViewModel
             {
                 Model = await DataAccess.GetSongById(songId);
                 SongSetSongList = await DataAccess.GetSongSetSongs(null, songSetId);
+                SongSetSong = (from SongSetSong sss in SongSetSongList
+                               where sss.SongId == Model.Id
+                               select sss).First();
                 SongTempoList = await DataAccess.GetSongTemposForSong(songId);
                 SongSet = await DataAccess.GetSongSetById(songSetId);
                 Metronome = new Metronome(SongTempoList);
@@ -76,9 +98,11 @@ namespace InThePocket.ViewModel
                 SongNdx = SongSetSongList.FindIndex(songSetSong => songSetSong.SongId == songId) + 1;
                 NotifyPropertyChanged("Model.Name");
                 NotifyPropertyChanged("Model.BPM");
-                NotifyPropertyChanged("Model.Notes");
+                NotifyPropertyChanged("SongSetSong.Notes");
                 NotifyPropertyChanged("Metronome.Count");
                 NotifyPropertyChanged("SongNdx");
+                NotifyPropertyChanged("PreviousEnabled");
+                NotifyPropertyChanged("NextEnabled");
             }
         }
 
@@ -122,6 +146,42 @@ namespace InThePocket.ViewModel
                 }
 
                 return _countOutCommand;
+            }
+        }
+
+        private ICommand _previousClicked;
+        public ICommand PreviousClicked
+        {
+            get
+            {
+                if (_previousClicked == null)
+                {
+                    _previousClicked = new Xamarin.Forms.Command(async (sender) =>
+                    {
+                        Guid nextId = SongSetSongList[(SongNdx - 1) - 1].SongId;
+                        await ProcessArguments(new List<string>() { "load", nextId.ToString() });
+                    });
+                }
+
+                return _previousClicked;
+            }
+        }
+
+        private ICommand _nextClicked;
+        public ICommand NextClicked
+        {
+            get
+            {
+                if (_nextClicked == null)
+                {
+                    _nextClicked = new Xamarin.Forms.Command(async (sender) =>
+                    {
+                        Guid nextId = SongSetSongList[(SongNdx - 1) + 1].SongId;
+                        await ProcessArguments(new List<string>() { "load", nextId.ToString() });
+                    });
+                }
+
+                return _nextClicked;
             }
         }
 

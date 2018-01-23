@@ -60,6 +60,9 @@ namespace InThePocket.Navigation
                 case "SongList":
                     nextPage = new SongList();
                     break;
+                case "ImportSong":
+                    nextPage = new ImportSong();
+                    break;
                 case "SongForm":
                     nextPage = new SongForm();
                     break;

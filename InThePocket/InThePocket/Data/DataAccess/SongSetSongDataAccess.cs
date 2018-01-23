@@ -14,7 +14,7 @@ namespace InThePocket.Data
             List<SongSetSong> songSetSongList = (from songSetSong in (await Database.Table<SongSetSong>().ToListAsync())
                                                  where (
                                                     (songId == null || songSetSong.SongId == songId) &&
-                                                    (songSetId.HasValue || songSetSong.SongSetId == songSetId)
+                                                    (songSetId == null || songSetSong.SongSetId == songSetId)
                                                  )
                                                  orderby songSetSong.OrderNdx
                                                  select songSetSong).ToList();

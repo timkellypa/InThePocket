@@ -30,7 +30,7 @@
                            Text="{Binding Model.Name}" />
                     <Label FontSize="Small"
                            HorizontalTextAlignment="Center"
-                           Text="{Binding Model.Notes}" />
+                           Text="{Binding SongSetSong.Notes}" />
                 </StackLayout>
                 <Label Grid.Row="1"
                        HorizontalTextAlignment="Center"
@@ -79,8 +79,12 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0"
+                            IsEnabled="{Binding PreviousEnabled}"
+                            Command="{Binding PreviousClicked}"
                             Text="&lt; Previous"></Button>
                     <Button Grid.Column="1"
+                            IsEnabled="{Binding NextEnabled}"
+                            Command="{Binding NextClicked}"
                             Text="Next &gt;"></Button>
                 </Grid>
 

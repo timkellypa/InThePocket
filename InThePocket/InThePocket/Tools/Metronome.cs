@@ -133,8 +133,18 @@ namespace InThePocket.Tools
             {
                 if (TempoQueue != null && TempoQueue.Count > 0)
                     return TempoQueue[0];
-                else
+                else if (TempoList != null && TempoList.Count > 0)
                     return TempoList[0];
+                else
+                    return new SongTempo()
+                    {
+                        AccentBeatsPerBar = 1,
+                        BeatsPerBar = 4,
+                        BeatUnit = 4,
+                        BPM = 0,
+                        DottedQuarterAccent = false,
+                        NumberOfBars = 0
+                    };
             }
         }
 
@@ -214,6 +224,10 @@ namespace InThePocket.Tools
 
         public void CountOut()
         {
+            if (TempoList == null || TempoList.Count == 0)
+            {
+                return;
+            }
             Count = 0;
             Measure = -COUNT_OUT_MEASURES + 1;
             TempoQueue = new List<SongTempo>() { TempoList.First().Clone() as SongTempo };
@@ -223,6 +237,11 @@ namespace InThePocket.Tools
 
         public void Start()
         {
+            if (TempoList == null || TempoList.Count == 0)
+            {
+                return;
+            }
+
             Count = 0;
             Measure = -PRE_START_COUNT_MEASURES;
             TempoQueue = new List<SongTempo>();

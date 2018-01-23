@@ -37,6 +37,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Router.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools\Metronome.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\ExtendedControls\SortableListView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\Page\ImportSong.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)UI\Page\SongForm.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -53,6 +56,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)UI\UserControls\ListViewCreateFooter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\LanguageUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ImportSongViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainMenuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\RouterViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongFormViewModel.cs" />
@@ -104,6 +108,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Page\SongView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)UI\Page\ImportSong.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

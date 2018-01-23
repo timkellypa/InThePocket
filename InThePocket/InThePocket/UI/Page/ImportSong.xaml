@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<d:PageBase xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="InThePocket.UI.Page.ImportSong"
+            xmlns:controls="clr-namespace:InThePocket.UI.Controls;Assembly:InThePocket"
+            x:Name="ImportSong"
+            xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+            xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
+            Title="Import Songs">
+        <Grid>
+            <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Picker ItemsSource="{Binding SongSetList}"
+                    ItemDisplayBinding="{Binding Name}"
+                    Title="Select Setlist"
+                    SelectedItem="{Binding SelectedSongSet, Mode=TwoWay}"
+                    Grid.Row="0" />
+
+        <Label Grid.Row="1">Select 1 or more songs</Label>
+
+        <syncfusion:SfListView SelectionMode="Multiple"
+                               ItemsSource="{Binding SongList}"
+                               Grid.Row="2"
+                               SelectionBackgroundColor="#CCCCCC"
+                               ItemSize="60"
+                               x:Name="listView"
+                               IsStickyFooter="True"
+                               SelectionChanged="SongSelectionChanged">
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Label x:Name="textLabel"
+                               Text="{Binding Path=Song.Name}"
+                               Grid.Column="0"
+                               FontSize="15"
+                               TextColor="#333333"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               Margin="5,0,0,0" />
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+
+        </syncfusion:SfListView>
+
+        <Button Grid.Row="3"
+                Command="{Binding Path=SaveClicked}"
+                BackgroundColor="DarkGreen"
+                Text="Import"
+                TextColor="White" />
+    </Grid>
+</d:PageBase>

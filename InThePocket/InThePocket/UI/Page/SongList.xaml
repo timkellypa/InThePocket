@@ -10,9 +10,7 @@
             xmlns:usercontrols="clr-namespace:InThePocket.UI.UserControls"
             Title="Songs">
     <ContentPage.ToolbarItems>
-        <!--
-        <ToolbarItem Name="New" Command="{Binding CreateItem}"></ToolbarItem>
-        -->
+        <ToolbarItem Name="Import Songs" Command="{Binding ImportSong}"></ToolbarItem>
     </ContentPage.ToolbarItems>
     <extendcontrols:SortableListView ItemsSource="{Binding Items}"
                            SelectionMode="Single"

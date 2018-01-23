@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Entry Grid.Row="0" Placeholder="Name" Text="{Binding Path=Model.Name}"></Entry>
-        <Entry Grid.Row="1" Placeholder="Notes" Text="{Binding Path=Model.Notes}"></Entry>
+        <Entry Grid.Row="1" Placeholder="Notes" Text="{Binding Path=Notes}"></Entry>
         <extendcontrols:SortableListView Grid.Row="2"
                                          ItemsSource="{Binding SongTempos}"
                                          SelectionMode="None"

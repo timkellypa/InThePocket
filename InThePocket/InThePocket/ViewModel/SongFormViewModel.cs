@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
 using System.Threading.Tasks;
+using System.Linq;
 
 using InThePocket.Data.Model;
 using InThePocket.Data;
@@ -34,8 +35,32 @@ namespace InThePocket.ViewModel
 
         public Guid SongSetId { get; set; }
 
+        public Guid SongSetSongId { get; set; }
+
+        private SongSetSong EditingSongSetSong { get; set; }
+
         public Song Model { get; set; }
 
+        private string _newNotes;
+        public string Notes
+        {
+            get
+            {
+                if (EditingSongSetSong != null)
+                {
+                    return EditingSongSetSong.Notes;
+                }
+                return _newNotes;
+            }
+            set
+            {
+                if (EditingSongSetSong != null)
+                {
+                    EditingSongSetSong.Notes = value;
+                }
+                _newNotes = value;
+            }
+        }
         public ObservableCollection<SongTempo> SongTempos { get; set; }
         
         public SongFormViewModel()
@@ -76,6 +101,7 @@ namespace InThePocket.ViewModel
             });
             if (Edit.HasValue)
             {
+                EditingSongSetSong = (await DataAccess.GetSongSetSongs(Edit.Value, SongSetId)).First();
                 Model = await DataAccess.GetSongById(Edit.Value);
                 NotifyPropertyChanged("Model.Name");
             }
@@ -174,14 +200,22 @@ namespace InThePocket.ViewModel
                 {
                     Id = Guid.NewGuid(),
                     SongId = Model.Id,
+                    SongSetId = SongSetId,
+                    Notes = Notes,
 
                     // 0 will trigger model to set when saving
                     OrderNdx = 0
                 };
                 await newSongSetSong.Save();
+
+                // from now on, set up this control to edit, not add
+                Edit = Model.Id;
+                Add = false;
+                await ProcessArguments(new List<string>() { "load" });
             }
             else
             {
+                await EditingSongSetSong.Save();
                 await Model.Save();
             }
         }
