@@ -38,7 +38,7 @@ namespace InThePocket.UI.Page
             if (e.PropertyName == "InClick" && (ViewModel as SongViewViewModel).InClick)
             {
                 var v = CrossVibrate.Current;
-                v.Vibration(TimeSpan.FromMilliseconds(250));
+                v.Vibration(TimeSpan.FromMilliseconds(100));
             }
         }
     }
