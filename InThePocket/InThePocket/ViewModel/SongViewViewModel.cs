@@ -112,6 +112,7 @@ namespace InThePocket.ViewModel
             {
                 NotifyPropertyChanged("PrimaryIndicatorBackgroundColor");
                 NotifyPropertyChanged("SecondaryIndicatorBackgroundColor");
+                NotifyPropertyChanged("InClick");
             }
         }
 
@@ -193,6 +194,14 @@ namespace InThePocket.ViewModel
         public Xamarin.Forms.Color SecondaryIndicatorBackgroundColor
         {
             get => (Metronome == null || !Metronome.InSecondaryClick) ? SECONDARY_CLICK_UNSELECTED : SECONDARY_CLICK_SELECTED;
+        }
+
+        public bool InClick
+        {
+            get
+            {
+                return Metronome.InClick;
+            }
         }
     }
 }

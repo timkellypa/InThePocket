@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using InThePocket.ViewModel;
 
+using Plugin.Vibrate;
+
 namespace InThePocket.UI.Page
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -28,6 +30,16 @@ namespace InThePocket.UI.Page
         public SongView() : base()
 		{
 			InitializeComponent ();
+            ViewModel.PropertyChanged += ViewModel_PropertyChanged;
 		}
-	}
+
+        private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "InClick" && (ViewModel as SongViewViewModel).InClick)
+            {
+                var v = CrossVibrate.Current;
+                v.Vibration(TimeSpan.FromMilliseconds(250));
+            }
+        }
+    }
 }
