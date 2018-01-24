@@ -26,14 +26,14 @@
                 </Grid.RowDefinitions>
                 <StackLayout Orientation="Vertical" Grid.Row="0" VerticalOptions="Center">
                     <Label FontSize="Large"
-                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"
                            Text="{Binding Model.Name}" />
                     <Label FontSize="Small"
-                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"
                            Text="{Binding SongSetSong.Notes}" />
                 </StackLayout>
                 <Label Grid.Row="1"
-                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="CenterAndExpand"
                        FontSize="Large"
                        Text="{Binding Metronome.Count}" />
             </Grid>
@@ -63,10 +63,10 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0"
-                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="CenterAndExpand"
                                Text="{Binding Metronome.CurrentTempo.BPM}" />
                         <Label Grid.Row="1"
-                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="CenterAndExpand"
                                Text="BPM" />
                     </Grid>
                     <Button Grid.Column="2"

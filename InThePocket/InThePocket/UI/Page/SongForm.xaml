@@ -18,7 +18,8 @@
         <Entry Grid.Row="1" Placeholder="Notes" Text="{Binding Path=Notes}"></Entry>
         <extendcontrols:SortableListView Grid.Row="2"
                                          ItemsSource="{Binding SongTempos}"
-                                         SelectionMode="None"
+                                         SelectionMode="Single"
+                                         SelectedItem="{Binding SelectedTempo}"
                                          DragStartMode="OnDragIndicator"
                                          SelectionBackgroundColor="#CCCCCC"
                                          ItemSize="60"

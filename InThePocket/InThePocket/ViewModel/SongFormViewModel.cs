@@ -41,6 +41,31 @@ namespace InThePocket.ViewModel
 
         public Song Model { get; set; }
 
+        private SongTempo _selectedTempo;
+        public SongTempo SelectedTempo
+        {
+            get
+            {
+                return _selectedTempo;
+            }
+            set
+            {
+                if (_selectedTempo != value)
+                {
+                    _selectedTempo = value;
+                    NotifyPropertyChanged("SelectedTempo");
+                    if (_selectedTempo != null)
+                    {
+                        Task.Run(async () => {
+                            await Task.Delay(250);
+                            SelectedTempo = null;
+                        });
+                        NotifyPropertyChanged($"ROUTE/SongTempoForm/edit/{_selectedTempo.Id}/song_id/{Model.Id}");
+                    }
+                }
+            }
+        }
+
         private string _newNotes;
         public string Notes
         {

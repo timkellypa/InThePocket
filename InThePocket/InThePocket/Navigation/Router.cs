@@ -72,6 +72,17 @@ namespace InThePocket.Navigation
                 case "SongTempoForm":
                     nextPage = new SongTempoForm();
                     break;
+                case "IsClosing":
+                    // Special case.  Run the pop on the main thread and re-process arguments on our view.
+                    nextPage = null;
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        if (route.Arguments.Count > 0)
+                        {
+                            await (CurrentPage as PageBase).ProcessArguments(route.Arguments);
+                        }
+                    });
+                    break;
                 case "Close":
                     // Special case.  Run the pop on the main thread and re-process arguments on our view.
                     nextPage = null;
