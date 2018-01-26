@@ -33,7 +33,7 @@ namespace InThePocket.ViewModel
 
         public string PageTitle
         {
-            get => (SongSet == null || SongSetSongList == null) ? "" : $"{SongSet.Name}: Song {SongNdx} of {SongSetSongList.Count}";
+            get => (SongSet == null || SongSetSongList == null) ? "" : $"{SongSet.Name} > Song {SongNdx} of {SongSetSongList.Count}";
         }
 
         public bool NextEnabled

@@ -6,7 +6,7 @@
             x:Name="ImportSong"
             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
             xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
-            Title="Import Songs">
+            Title="{Binding PageTitle}">
         <Grid>
             <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

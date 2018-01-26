@@ -23,7 +23,7 @@ namespace InThePocket.ViewModel
 
         public string PageTitle
         {
-            get => Add ? "New SetList" : $"Edit SetList: {Model.Name}";
+            get => Add ? "New SetList" : $"{Model.Name} > Edit Setlist";
         }
 
         public bool Add { get; set; }

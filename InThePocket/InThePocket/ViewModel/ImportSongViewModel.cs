@@ -23,6 +23,10 @@ namespace InThePocket.ViewModel
             return Guid.Parse("8931a682-41d2-42ab-beb6-2bdd79ebe175");
         }
 
+        public string PageTitle {
+            get => $"{OriginalSongSetTitle} > Import Songs";
+        }
+
         public ObservableCollection<SongSet> SongSetList { get; }
 
         public SongSet SelectedSongSet { get; set; }
@@ -30,6 +34,8 @@ namespace InThePocket.ViewModel
         public Guid SongSetId { get; set; }
 
         public ObservableCollection<SongSetSong> SongList { get; }
+
+        public string OriginalSongSetTitle { get; set; }
 
         public List<SongSetSong> SelectedSongs { get; }
 
@@ -69,6 +75,7 @@ namespace InThePocket.ViewModel
 
             if (load)
             {
+                OriginalSongSetTitle = (await DataAccess.GetSongSetById(SongSetId)).Name;
                 await LoadData();
             }
         }

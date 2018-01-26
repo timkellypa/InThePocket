@@ -27,6 +27,8 @@ namespace InThePocket.ViewModel
 
         public Guid? SongSetID { get; set; }
 
+        public SongSet SongSet { get; set; }
+
         public override async Task ProcessArguments(List<string> arguments)
         {
             bool nextIsID = false,
@@ -52,7 +54,16 @@ namespace InThePocket.ViewModel
             }
             if (load)
             {
+                SongSet = await DataAccess.GetSongSetById(SongSetID.Value);
                 await RefreshData();
+            }
+        }
+
+        public string PageTitle
+        {
+            get
+            {
+                return $"{SongSet.Name} > Songs";
             }
         }
 
@@ -61,6 +72,8 @@ namespace InThePocket.ViewModel
         public SongListViewModel()
         {
             Items = new ObservableCollection<SongSetSong>();
+
+            SongSet = new SongSet();
 
             RefreshDataCommand = new Command(
                 async () => await RefreshData());

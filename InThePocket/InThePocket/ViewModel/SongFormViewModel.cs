@@ -26,7 +26,7 @@ namespace InThePocket.ViewModel
 
         public string PageTitle
         {
-            get => Add ? "New Song" : $"Edit Song: {Model.Name}";
+            get => !(Add || (Edit.HasValue)) ? "" : (Add ? $"{SongSet.Name} > New Song" : $"{SongSet.Name} > {Model.Name} > Edit");
         }
 
         public bool Add { get; set; }
@@ -34,6 +34,8 @@ namespace InThePocket.ViewModel
         public Guid? Edit { get; set; }
 
         public Guid SongSetId { get; set; }
+
+        public SongSet SongSet { get; set; }
 
         public Guid SongSetSongId { get; set; }
 
@@ -60,7 +62,7 @@ namespace InThePocket.ViewModel
                             await Task.Delay(250);
                             SelectedTempo = null;
                         });
-                        NotifyPropertyChanged($"ROUTE/SongTempoForm/edit/{_selectedTempo.Id}/song_id/{Model.Id}");
+                        NotifyPropertyChanged($"ROUTE/SongTempoForm/edit/{_selectedTempo.Id}/song_id/{Model.Id}/load");
                     }
                 }
             }
@@ -90,6 +92,8 @@ namespace InThePocket.ViewModel
         
         public SongFormViewModel()
         {
+            SongSet = new SongSet();
+
             Model = new Song();
 
             SongTempos = new ObservableCollection<SongTempo>();
@@ -113,6 +117,7 @@ namespace InThePocket.ViewModel
                 {
                     Add = true;
                     Edit = null;
+                    load = true;
                 }
                 if (previous == "song_set_id")
                 {
@@ -133,6 +138,7 @@ namespace InThePocket.ViewModel
 
             if (load)
             {
+                SongSet = await DataAccess.GetSongSetById(SongSetId);
                 await RefreshData();
             }
         }
@@ -176,7 +182,7 @@ namespace InThePocket.ViewModel
                     _createTempo = new Xamarin.Forms.Command(async (sender) =>
                     {
                         await PerformSave();
-                        NotifyPropertyChanged($"ROUTE/SongTempoForm/add/song_id/{Model.Id}");
+                        NotifyPropertyChanged($"ROUTE/SongTempoForm/add/song_id/{Model.Id}/load");
                     });
                 }
                 return _createTempo;
@@ -192,7 +198,7 @@ namespace InThePocket.ViewModel
                 {
                     _editTempo = new Xamarin.Forms.Command((sender) =>
                     {
-                        NotifyPropertyChanged($"ROUTE/SongTempoForm/edit/{(sender as SongTempo).Id}/song_id/{Model.Id}");
+                        NotifyPropertyChanged($"ROUTE/SongTempoForm/edit/{(sender as SongTempo).Id}/song_id/{Model.Id}/load");
                     });
                 }
                 return _editTempo;

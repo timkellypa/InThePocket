@@ -8,7 +8,7 @@
             xmlns:extendcontrols="clr-namespace:InThePocket.UI.ExtendedControls"
             xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
             xmlns:usercontrols="clr-namespace:InThePocket.UI.UserControls"
-            Title="Songs">
+            Title="{Binding PageTitle}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Import Songs" Command="{Binding ImportSong}"></ToolbarItem>
     </ContentPage.ToolbarItems>

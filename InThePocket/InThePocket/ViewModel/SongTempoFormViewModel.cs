@@ -124,12 +124,14 @@ namespace InThePocket.ViewModel
 
         public SongTempoFormViewModel()
         {
+            Song = new Song();
             Model = new SongTempo();
         }
 
         public override async Task ProcessArguments(List<string> arguments)
         {
             string previous = null;
+            bool load = false;
             arguments.ForEach((arg) =>
             {
                 if (previous == "edit")
@@ -140,6 +142,10 @@ namespace InThePocket.ViewModel
                 {
                     Add = true;
                     Edit = null;
+                }
+                if (arg == "load")
+                {
+                    load = true;
                 }
                 if (previous == "song_id")
                 {
@@ -157,6 +163,11 @@ namespace InThePocket.ViewModel
             {
                 Model.SongId = SongId;
             }
+
+            if (load)
+            {
+                Song = await DataAccess.GetSongById(SongId);
+            }
         }
 
         public bool Add { get; set; }
@@ -165,11 +176,13 @@ namespace InThePocket.ViewModel
 
         public SongTempo Model { get; set; }
 
+        public Song Song { get; set; }
+
         public Guid SongId { get; set; }
 
         public string PageTitle
         {
-            get => Add ? "New Tempo" : $"Edit Tempo: {Model.DisplayText}";
+            get => !(Add || Edit.HasValue) ? "" : (Add ? $"{Song.Name} > New Tempo" : $"{Song.Name} > Edit Tempo");
         }
 
         private ICommand _saveClicked;
