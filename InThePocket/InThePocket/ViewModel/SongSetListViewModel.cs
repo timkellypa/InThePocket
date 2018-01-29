@@ -11,7 +11,7 @@ using InThePocket.Data.Model;
 
 namespace InThePocket.ViewModel
 {
-    class SongSetListViewModel : ViewModelBase
+    class SongSetListViewModel : PageViewModelBase
     {
         public override Guid GetCommToken()
         {

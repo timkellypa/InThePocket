@@ -33,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SongSetSong.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SongTempo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SortableModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DependencyServices\ICloseApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Route.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Navigation\Router.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools\Metronome.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utils\LanguageUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\ImportSongViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\MainMenuViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModel\PageViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\RouterViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModel\SongSetFormViewModel.cs" />

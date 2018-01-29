@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace InThePocket.ViewModel
 {
-    public class MainMenuViewModel : ViewModelBase
+    public class MainMenuViewModel : PageViewModelBase
     {
 
 

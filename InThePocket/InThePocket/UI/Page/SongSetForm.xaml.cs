@@ -15,7 +15,7 @@ namespace InThePocket.UI.Page
 	public partial class SongSetForm : PageBase
 	{
 
-        public override ViewModelBase ViewModel
+        public override PageViewModelBase ViewModel
         {
             get
             {

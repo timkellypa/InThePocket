@@ -11,7 +11,7 @@ using InThePocket.Data;
 
 namespace InThePocket.ViewModel
 {
-    class ImportSongViewModel : ViewModelBase
+    class ImportSongViewModel : PageViewModelBase
     {
         public override List<string> GetCommProperties()
         {

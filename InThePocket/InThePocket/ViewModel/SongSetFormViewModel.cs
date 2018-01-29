@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace InThePocket.ViewModel
 {
-    class SongSetFormViewModel : ViewModelBase
+    class SongSetFormViewModel : PageViewModelBase
     {
         public override List<string> GetCommProperties()
         {

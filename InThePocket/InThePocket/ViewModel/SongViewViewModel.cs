@@ -13,7 +13,7 @@ using System.Drawing;
 
 namespace InThePocket.ViewModel
 {
-    public class SongViewViewModel : ViewModelBase
+    public class SongViewViewModel : PageViewModelBase
     {
         public Xamarin.Forms.Color PRIMARY_CLICK_UNSELECTED = new Xamarin.Forms.Color(0, 0.5, 0);
         public Xamarin.Forms.Color PRIMARY_CLICK_SELECTED = new Xamarin.Forms.Color(0, 1, 0);

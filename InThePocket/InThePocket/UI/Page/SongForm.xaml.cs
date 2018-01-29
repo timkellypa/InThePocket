@@ -17,7 +17,7 @@ namespace InThePocket.UI.Page
     public partial class SongForm : PageBase
     {
 
-        public override ViewModelBase ViewModel
+        public override PageViewModelBase ViewModel
         {
             get
             {
@@ -32,21 +32,6 @@ namespace InThePocket.UI.Page
         public SongForm() : base()
         {
             InitializeComponent();
-
-            Disappearing += SongForm_Disappearing;
-        }
-
-        /// <summary>
-        /// If we are going back, perform a load on the previous page, because it's likely that we saved the song adding a tempo.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SongForm_Disappearing(object sender, EventArgs e)
-        {
-            if (Router.CurrentPage is SongForm)
-            {
-                (ViewModel as SongFormViewModel).NotifyPropertyChanged("ROUTE/IsClosing/load");
-            }
         }
     }
 }

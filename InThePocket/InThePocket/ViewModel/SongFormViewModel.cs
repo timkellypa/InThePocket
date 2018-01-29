@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace InThePocket.ViewModel
 {
-    class SongFormViewModel : ViewModelBase
+    class SongFormViewModel : PageViewModelBase
     {
         public override List<string> GetCommProperties()
         {
@@ -269,6 +269,12 @@ namespace InThePocket.ViewModel
                 }
                 return _saveClicked;
             }
+        }
+
+        public override bool BackButtonPressed()
+        {
+            NotifyPropertyChanged("ROUTE/Close/load");
+            return true;
         }
     }
 }

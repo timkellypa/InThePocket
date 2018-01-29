@@ -15,7 +15,7 @@ namespace InThePocket.UI.Page
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SongView : PageBase
 	{
-        public override ViewModelBase ViewModel
+        public override PageViewModelBase ViewModel
         {
             get
             {

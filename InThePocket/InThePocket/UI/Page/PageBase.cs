@@ -17,8 +17,8 @@ namespace InThePocket.UI.Page
 {
     abstract public class PageBase : ContentPage
     {
-        protected ViewModelBase _viewModel;
-        abstract public ViewModelBase ViewModel { get; }
+        protected PageViewModelBase _viewModel;
+        abstract public PageViewModelBase ViewModel { get; }
 
         public PageBase()
         {
@@ -49,6 +49,11 @@ namespace InThePocket.UI.Page
         public async Task ProcessArguments(List<string> arguments)
         {
             await ViewModel.ProcessArguments(arguments);
+        }
+
+        public bool BackButtonPressed ()
+        {
+            return _viewModel.BackButtonPressed();
         }
     }
 }

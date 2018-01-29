@@ -14,7 +14,7 @@ namespace InThePocket.UI.Page
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SongTempoForm : PageBase
 	{
-        public override ViewModelBase ViewModel
+        public override PageViewModelBase ViewModel
         {
             get
             {
