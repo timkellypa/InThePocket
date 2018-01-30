@@ -29,17 +29,20 @@ namespace InThePocket.Tools
             {
                 return _measure;
             }
-            set
+            protected set
             {
-                int oldMeasure = _measure;
-                _measure = value;
-                if (_measure <= 0 || TempoQueue.Count == 0 || TempoQueue.First().NumberOfBars == 0)
+                int oldMeasure = _measure,
+                    // keep another variable for the new value.  Don't set _measure until we are about to leave, for INotifyPropertyChanged purposes
+                    newMeasure = value;
+
+                if (newMeasure <= 0 || TempoQueue.Count == 0 || TempoQueue.First().NumberOfBars == 0)
                 {
+                    _measure = newMeasure;
                     return;
                 }
 
                 // Pop off the number of measures that we've incremented off the queue.
-                for (int i = 1; i <= _measure - oldMeasure; ++i)
+                for (int i = 1; i <= newMeasure - oldMeasure; ++i)
                 {
                     bool poppedOne = false;
                     do
@@ -62,7 +65,43 @@ namespace InThePocket.Tools
                         TempoQueue.RemoveAt(0);
                     }
                 }
+                _measure = newMeasure;
             }
+        }
+
+        public string BarsRemainingDisplay
+        {
+            get
+            {
+                if (CurrentTempo == null || CurrentTempo.NumberOfBars < 0 || InCountOut || Count == 0 || Measure < 0)
+                {
+                    return "";
+                }
+                else
+                {
+                    return $"{CurrentTempo.NumberOfBars.ToString()} Bars";
+                }
+            }
+        }
+
+        public string TimeSignatureDisplay
+        {
+            get
+            {
+                if (CurrentTempo == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return $"{CurrentTempo.BeatsPerBar}/{CurrentTempo.BeatUnit}";
+                }
+            }
+        }
+
+        public string CountDisplay
+        {
+            get => Count > 0 ? $"{Count}" : "";
         }
 
         private int _count;
@@ -74,23 +113,21 @@ namespace InThePocket.Tools
             }
             protected set
             {
-                _count = value;
-
-                if (_count == 0)
+                int newCount = value;
+                if (TempoQueue == null || TempoQueue.Count == 0)
                 {
-                    return;
+                    newCount = 0;
                 }
-                else if (TempoQueue == null || TempoQueue.Count == 0)
-                {
-                    Count = 0;
-                    return;
-                }
-
-                if (_count > TempoQueue.First().BeatsPerBar)
+                else if (newCount > TempoQueue.First().BeatsPerBar)
                 {
                     Measure++;
-                    _count = TempoQueue.Count == 0 ? 0 : 1;
+                    newCount = TempoQueue.Count == 0 ? 0 : 1;
                 }
+
+                _count = newCount;
+                NotifyPropertyChanged("TimeSignatureDisplay");
+                NotifyPropertyChanged("BarsRemainingDisplay");
+                NotifyPropertyChanged("CountDisplay");
             }
         }
         public List<SongTempo> TempoList;
@@ -201,7 +238,10 @@ namespace InThePocket.Tools
 
             // Don't continue if the count was set back to zero... That means, we need to stop.
             if (Count == 0)
+            {
+                InCountOut = false;
                 return;
+            }
 
             _nextClickTimer.Interval = ((1.0 / BPM) * 60 * 1000.0 - DEFAULT_BEAT_DELAY);
             _nextClickTimer.Start();
@@ -222,6 +262,23 @@ namespace InThePocket.Tools
             }
         }
 
+        private bool _inCountOut;
+        public bool InCountOut
+        {
+            get
+            {
+                return _inCountOut;
+            }
+            set
+            {
+                if (_inCountOut != value)
+                {
+                    _inCountOut = value;
+                    NotifyPropertyChanged("BarsRemainingDisplay");
+                }
+            }
+        }
+
         public void CountOut()
         {
             if (TempoList == null || TempoList.Count == 0)
@@ -232,6 +289,7 @@ namespace InThePocket.Tools
             Measure = -COUNT_OUT_MEASURES + 1;
             TempoQueue = new List<SongTempo>() { TempoList.First().Clone() as SongTempo };
             TempoQueue.First().NumberOfBars = 1;
+            InCountOut = true;
             Click();
         }
 
@@ -252,8 +310,9 @@ namespace InThePocket.Tools
                 {
                     tempoCopy.NumberOfBars = -1;
                 }
-                TempoQueue.Add(tempo.Clone() as SongTempo);
+                TempoQueue.Add(tempoCopy);
             }
+            InCountOut = false;
             Click();
         }
 
@@ -263,6 +322,7 @@ namespace InThePocket.Tools
             _clickDurationTimer.Stop();
             TempoQueue = new List<SongTempo>();
             Count = 0;
+            InCountOut = false;
             Off();
         }
 

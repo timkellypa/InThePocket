@@ -97,7 +97,6 @@ namespace InThePocket.ViewModel
                 Metronome.PropertyChanged += Metronome_PropertyChanged;
                 SongNdx = SongSetSongList.FindIndex(songSetSong => songSetSong.SongId == songId) + 1;
                 NotifyPropertyChanged("Model.Name");
-                NotifyPropertyChanged("Model.BPM");
                 NotifyPropertyChanged("SongSetSong.Notes");
                 NotifyPropertyChanged("Metronome.Count");
                 NotifyPropertyChanged("SongNdx");
@@ -147,6 +146,23 @@ namespace InThePocket.ViewModel
                 }
 
                 return _countOutCommand;
+            }
+        }
+
+        private ICommand _stopCommand;
+        public ICommand StopCommand
+        {
+            get
+            {
+                if (_stopCommand == null)
+                {
+                    _stopCommand = new Xamarin.Forms.Command((sender) =>
+                    {
+                        Metronome.Stop();
+                    });
+                }
+
+                return _stopCommand;
             }
         }
 
@@ -200,8 +216,15 @@ namespace InThePocket.ViewModel
         {
             get
             {
-                return Metronome.InClick;
+                return Metronome != null && Metronome.InClick;
             }
+        }
+
+        public override bool BackButtonPressed()
+        {
+            Metronome.Dispose();
+            Metronome = null;
+            return base.BackButtonPressed();
         }
     }
 }

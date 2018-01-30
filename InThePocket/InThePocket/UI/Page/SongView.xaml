@@ -6,7 +6,7 @@
             Title="{Binding PageTitle}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="3*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -21,10 +21,23 @@
             <Grid x:Name="SongInfoGrid"
                   Grid.Column="1">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <StackLayout Orientation="Vertical" Grid.Row="0" VerticalOptions="Center">
+                <StackLayout Orientation="Vertical"
+                             Grid.Row="0"
+                             VerticalOptions="Start">
+                    <Label HorizontalOptions="CenterAndExpand"
+                           FontSize="Large"
+                           Text="{Binding Metronome.CountDisplay}" />
+                    <Label HorizontalOptions="CenterAndExpand"
+                           FontSize="Small"
+                           Text="{Binding Metronome.BarsRemainingDisplay}" />
+                </StackLayout>
+                <StackLayout Orientation="Vertical"
+                             Grid.Row="1"
+                             VerticalOptions="Center">
                     <Label FontSize="Large"
                            HorizontalOptions="CenterAndExpand"
                            Text="{Binding Model.Name}" />
@@ -32,10 +45,17 @@
                            HorizontalOptions="CenterAndExpand"
                            Text="{Binding SongSetSong.Notes}" />
                 </StackLayout>
-                <Label Grid.Row="1"
-                       HorizontalOptions="CenterAndExpand"
-                       FontSize="Large"
-                       Text="{Binding Metronome.Count}" />
+
+                <StackLayout Orientation="Vertical"
+                             Grid.Row="2"
+                             VerticalOptions="Center">
+                    <Label HorizontalOptions="CenterAndExpand"
+                           Text="{Binding Metronome.CurrentTempo.BPM}" />
+                    <Label HorizontalOptions="CenterAndExpand"
+                           Text="BPM" />
+                    <Label HorizontalOptions="CenterAndExpand"
+                           Text="{Binding Metronome.TimeSignatureDisplay}" />
+                </StackLayout>
             </Grid>
             <Grid x:Name="SecondaryClickIndicator"
                   BackgroundColor="{Binding SecondaryIndicatorBackgroundColor}"
@@ -56,19 +76,9 @@
                     <Button Grid.Column="0"
                             Command="{Binding CountOutCommand}"
                             Text="Count Out" />
-                    <Grid Grid.Column="1"
-                          VerticalOptions="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0"
-                               HorizontalOptions="CenterAndExpand"
-                               Text="{Binding Metronome.CurrentTempo.BPM}" />
-                        <Label Grid.Row="1"
-                               HorizontalOptions="CenterAndExpand"
-                               Text="BPM" />
-                    </Grid>
+                    <Button Grid.Column="1"
+                            Command="{Binding StopCommand}"
+                            Text="Stop" />
                     <Button Grid.Column="2"
                             Command="{Binding PlayCommand}"
                             Text="Play" />
