@@ -338,7 +338,7 @@ namespace InThePocket.Tools
             _clickDurationTimer.Dispose();
             _nextClickTimer.Dispose();
             TempoList.Clear();
-            TempoQueue.Clear();
+            TempoQueue?.Clear();
             TempoList = null;
             TempoQueue = null;
         }
