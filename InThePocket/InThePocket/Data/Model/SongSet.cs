@@ -44,9 +44,28 @@ namespace InThePocket.Data.Model
                 Date = new DateTime(0);
             }
         }
+
+        [Ignore]
         public Boolean IsEvent => !IsMaster;
 
+        [Ignore]
         public String Detail
+        {
+            get
+            {
+                if (IsMaster)
+                {
+                    return "";
+                }
+                else
+                {
+                    return $"{Location} - {Date.ToShortDateString()}";
+                }
+            }
+        }
+
+        [Ignore]
+        public String MasterOrInstanceDisplay
         {
             get
             {
@@ -56,7 +75,7 @@ namespace InThePocket.Data.Model
                 }
                 else
                 {
-                    return $"{Location} - {Date.ToShortDateString()}";
+                    return "Event List";
                 }
             }
         }

@@ -3,6 +3,7 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="InThePocket.UI.Page.SongSetList"
             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+            xmlns:data="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable"
             xmlns:extendcontrols="clr-namespace:InThePocket.UI.ExtendedControls"
             x:Name="SongSetList"
             xmlns:usercontrols="clr-namespace:InThePocket.UI.UserControls"
@@ -12,11 +13,19 @@
                                      SelectionMode="Single"
                                      DragStartMode="OnDragIndicator"
                                      SelectionBackgroundColor="#CCCCCC"
+                                     IsStickyGroupHeader="True"
                                      ItemSize="60"
                                      x:Name="listView"
                                      SelectedItem="{Binding SelectedItem}"
                                      IsStickyFooter="True"
                                      AllowSwiping="True">
+        <syncfusion:SfListView.DataSource>
+            <data:DataSource>
+                <data:DataSource.GroupDescriptors>
+                    <data:GroupDescriptor PropertyName="MasterOrInstanceDisplay" />
+                </data:DataSource.GroupDescriptors>
+            </data:DataSource>
+        </syncfusion:SfListView.DataSource>
         <!--Built in Cells-->
         <syncfusion:SfListView.ItemTemplate>
             <DataTemplate>
@@ -26,15 +35,31 @@
                         <ColumnDefinition Width="60" />
                     </Grid.ColumnDefinitions>
 
-                    <Label x:Name="textLabel"
-                           Text="{Binding Path=Name}"
-                           Grid.Column="0"
-                           FontSize="15"
-                           TextColor="#333333"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Start"
-                           Margin="5,0,0,0" />
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label x:Name="titleLabel"
+                               Text="{Binding Path=Name}"
+                               Grid.Row="0"
+                               FontSize="15"
+                               TextColor="#333333"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               Margin="5,0,5,0" />
 
+                        <Label x:Name="detailLabel"
+                               Text="{Binding Path=Detail}"
+                               Grid.Row="1"
+                               FontSize="Small"
+                               TextColor="#777777"
+                               IsVisible="{Binding IsEvent}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="End"
+                               Margin="5,0,5,0" />
+
+                    </Grid>
                     <syncfusion:DragIndicatorView Grid.Column="1"
                                                   ListView="{x:Reference listView}"
                                                   HorizontalOptions="Center"

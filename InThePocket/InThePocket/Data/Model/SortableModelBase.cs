@@ -37,6 +37,11 @@ namespace InThePocket.Data.Model
                                                  select item as ISortableModel).ToList();
 
             // cache of new sort index for mobile item (original item's index).  Shift all other items first
+            if (toIndex < 0 || toIndex >= orderedItems.Count)
+            {
+                return;
+            }
+
             int mobileOrderIndex = orderedItems[toIndex].OrderNdx;
 
             int i = toIndex,

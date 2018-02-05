@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Text;
 
 using InThePocket.Data.Model;
+
+using System.Linq;
 using SQLite;
 
 namespace InThePocket.Data
@@ -12,8 +14,11 @@ namespace InThePocket.Data
     {
         public static async Task<List<SongSet>> GetSongSetList()
         {
-            AsyncTableQuery<SongSet> songSet = Database.Table<SongSet>();
-            return await songSet.ToListAsync();
+            // Sort by event lists first, then master lists.
+            List<SongSet> songSetList = (from songSet in await (Database.Table<SongSet>()).ToListAsync()
+                                         orderby songSet.IsMaster, songSet.OrderNdx
+                                        select songSet).ToList();
+            return songSetList;
         }
 
         public static async Task<SongSet> GetSongSetById(Guid id)
