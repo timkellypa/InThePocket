@@ -4,6 +4,8 @@ using Android.OS;
 
 using Android.Views;
 
+using Android.Support.V7.Widget;
+
 using System.Linq;
 using InThePocket.UI.Page;
 
@@ -22,6 +24,9 @@ namespace InThePocket.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
             LoadApplication(new App());
+
+            Toolbar toolbar = this.FindViewById<Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
