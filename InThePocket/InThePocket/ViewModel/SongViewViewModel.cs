@@ -26,6 +26,48 @@ namespace InThePocket.ViewModel
             return new List<string>() { };
         }
 
+        public SongViewViewModel()
+        {
+            SoundMode = SoundModes.SOUND;
+        }
+
+        public enum SoundModes
+        {
+            MUTE,
+            SOUND,
+            VIBRATE
+        }
+
+        public string SoundIndicatorIcon
+        {
+            get
+            {
+                switch(SoundMode)
+                {
+                    case SoundModes.MUTE:
+                        return "mute.png";
+                    case SoundModes.SOUND:
+                        return "sound.png";
+                    case SoundModes.VIBRATE:
+                        return "mute_vibrate.png";
+                }
+                throw new NotSupportedException("Attempt to retrieve sound indicator without a SoundMode");
+            }
+        }
+
+        private SoundModes _soundMode;
+        public SoundModes SoundMode
+        {
+            get
+            {
+                return _soundMode;
+            }
+            set
+            {
+                _soundMode = value;
+            }
+        }
+
         public override Guid GetCommToken()
         {
              return Guid.Parse("9fb0b702-7e4f-4d95-923f-7403b09e82fb");
@@ -199,6 +241,34 @@ namespace InThePocket.ViewModel
                 }
 
                 return _nextClicked;
+            }
+        }
+
+        private ICommand _toggleSoundIndicator;
+        public ICommand ToggleSoundIndicator
+        {
+            get
+            {
+                if (_toggleSoundIndicator == null)
+                {
+                    _toggleSoundIndicator = new Xamarin.Forms.Command((sender) =>
+                    {
+                        switch (SoundMode)
+                        {
+                            case SoundModes.MUTE:
+                                SoundMode = SoundModes.SOUND;
+                                break;
+                            case SoundModes.SOUND:
+                                SoundMode = SoundModes.VIBRATE;
+                                break;
+                            case SoundModes.VIBRATE:
+                                SoundMode = SoundModes.MUTE;
+                                break;
+                        }
+                    });
+                }
+
+                return _toggleSoundIndicator;
             }
         }
 

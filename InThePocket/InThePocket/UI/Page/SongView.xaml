@@ -4,6 +4,10 @@
             xmlns:d="clr-namespace:InThePocket.UI.Page;Assembly:InThePocket"
             x:Class="InThePocket.UI.Page.SongView"
             Title="{Binding PageTitle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="{Binding SoundIndicatorIcon}"
+                     Command="{Binding ToggleSoundIndicator}" />
+    </ContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
