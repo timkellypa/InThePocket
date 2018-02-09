@@ -12,15 +12,28 @@
                                     Maximum="300"
                                     Watermark="BPM" />
         <Label Text="Time Signature" />
-        <StackLayout Orientation="Horizontal">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Picker ItemsSource="{Binding BeatsPerBarOptions}"
+                    VerticalOptions="CenterAndExpand"
+                    Grid.Column="1"
                     ItemDisplayBinding="{Binding Value}"
                     SelectedItem="{Binding SelectedBeatsPerBar, Mode=TwoWay}" />
-            <Label Text="/" />
+            <Label Text="/"
+                   VerticalOptions="CenterAndExpand"
+                   Grid.Column="2" />
             <Picker ItemsSource="{Binding BeatUnitOptions}"
+                    VerticalOptions="CenterAndExpand"
+                    Grid.Column="3"
                     ItemDisplayBinding="{Binding Value}"
                     SelectedItem="{Binding SelectedBeatUnit, Mode=TwoWay}" />
-        </StackLayout>
+        </Grid>
         <StackLayout Orientation="Horizontal">
             <Switch IsToggled="{Binding Model.DottedQuarterAccent}"/>
             <Label Text="Dotted Quarter Accent (usually for 6/8 time)" />
